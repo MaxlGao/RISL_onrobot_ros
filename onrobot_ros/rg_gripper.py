@@ -5,7 +5,7 @@ import sys
 import os
 import time
 import subprocess
-from std_msgs.msg import String  # Message type for commands
+from std_msgs.msg import String, Float64  # Message type for commands
 
 # # Fix onrobot.py path
 # onrobot_path = "/home/kpatnaik/Desktop/colcon_ws/src/onrobot-rg/src"
@@ -40,6 +40,8 @@ class RGGripperNode(Node):
             self.command_callback,
             10)
         
+        self.gripper_width_pub = self.create_publisher(Float64, 'gripper_queried_width', 10)
+        
         self.get_logger().info("Waiting for gripper commands on /gripper_command topic...")
 
     def ensure_socat(self):
@@ -51,7 +53,7 @@ class RGGripperNode(Node):
         subprocess.Popen(socat_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(2)  # Give socat time to start
 
-    def command_callback(self, msg):
+    def command_callback(self, msg: String):
         """Handles incoming ROS 2 commands for the gripper."""
         command = msg.data.lower()
         self.get_logger().info(f"Received command: {command}")
@@ -62,9 +64,16 @@ class RGGripperNode(Node):
         elif command == "close":
             self.get_logger().info("Closing gripper...")
             self.rg.close_gripper()
+        elif command == "query":
+            width_mm = self.rg.get_width_with_offset()
+            msg = Float64()
+            msg.data = width_mm
+            self.gripper_width_pub.publish(msg)
+            self.get_logger().info(f"Query gripper. Answer: {width_mm}")
         elif command.isdigit():
+            width_mm = self.rg.get_width_with_offset()
             width = int(command)
-            self.get_logger().info(f"Moving gripper to {width} mm...")
+            self.get_logger().info(f"Moving to {(0.1*width):4.1f} mm, from {width_mm}")
             self.rg.move_gripper(width)
         else:
             self.get_logger().warn("Unknown command received.")

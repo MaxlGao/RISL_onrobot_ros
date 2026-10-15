@@ -191,7 +191,7 @@ class RG():
     def move_gripper(self, width_val, force_val=400):
         try:
             params = [force_val, width_val, 16]
-            print("Start moving gripper.")
+            # print("Start moving gripper.")
             result = self.client.write_registers(
                 address=0, values=params, unit=65)
             if isinstance(result, ModbusIOException):

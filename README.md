@@ -12,6 +12,9 @@ This **ROS 2 package** provides a lightweight interface to control an **OnRobot 
 - Easy integration with larger robot stacks
 - Tested with OnRobot hardware
 
+## Install
+Install the pip package pymodbus version 2.5.3. Any later version will not work
+
 ## 🔧 Test
 
 1. Launch the gripper control node in one terminal:
