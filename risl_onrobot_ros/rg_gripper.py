@@ -12,7 +12,7 @@ from std_msgs.msg import String, Float64  # Message type for commands
 # if onrobot_path not in sys.path:
 #     sys.path.append(onrobot_path)
 
-from onrobot_ros.custom_libraries.onrobot import RG  # Import OnRobot RG class
+from risl_onrobot_ros.custom_libraries.onrobot import RG  # Import OnRobot RG class
 
 class RGGripperNode(Node):
     def __init__(self):

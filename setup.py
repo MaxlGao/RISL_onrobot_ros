@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'onrobot_ros'
+package_name = 'risl_onrobot_ros'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'gripper_control = onrobot_ros.rg_gripper:main',
+            'gripper_control = risl_onrobot_ros.rg_gripper:main',
         ],
     },
 )

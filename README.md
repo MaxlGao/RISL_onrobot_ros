@@ -20,7 +20,7 @@ Install the pip package pymodbus version 2.5.3. Any later version will not work
 1. Launch the gripper control node in one terminal:
 
    ```bash
-   ros2 run onrobot_ros gripper_control
+   ros2 run risl_onrobot_ros gripper_control
 
 2. In a new terminal, source your ROS 2 Humble setup and workspace overlay: `source /opt/ros/humble/setup.bash` `source ~/your_ws/install/setup.bash`
 
