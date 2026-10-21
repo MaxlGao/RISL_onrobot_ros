@@ -8,7 +8,7 @@ import subprocess
 from std_msgs.msg import String, Float64  # Message type for commands
 
 # # Fix onrobot.py path
-# onrobot_path = "/home/kpatnaik/Desktop/colcon_ws/src/onrobot-rg/src"
+# onrobot_path = "/home/mgao18/Desktop/colcon_ws/src/onrobot-rg/src"
 # if onrobot_path not in sys.path:
 #     sys.path.append(onrobot_path)
 
